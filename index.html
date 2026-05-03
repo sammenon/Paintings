@@ -1,19 +1,117 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title>Santosh Menon's Paintings</title>
+  <title>Santosh Menon | Paintings</title>
   <style>
-    body { font-family: Arial; text-align: center; background: #f7f3ed; }
-    img { width: 300px; margin: 15px; border-radius: 10px; }
+    body {
+      margin: 0;
+      font-family: Arial, sans-serif;
+      background: #f7f3ed;
+      color: #222;
+    }
+
+    header {
+      text-align: center;
+      padding: 60px 20px 30px;
+    }
+
+    header h1 {
+      font-size: 42px;
+      margin-bottom: 10px;
+    }
+
+    header p {
+      font-size: 18px;
+      color: #666;
+    }
+
+    .gallery {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 30px;
+      padding: 40px;
+      max-width: 1100px;
+      margin: auto;
+    }
+
+    .card {
+      background: white;
+      border-radius: 18px;
+      overflow: hidden;
+      box-shadow: 0 8px 20px rgba(0,0,0,0.12);
+      transition: transform 0.3s ease;
+    }
+
+    .card:hover {
+      transform: translateY(-8px);
+    }
+
+    .card img {
+      width: 100%;
+      height: 320px;
+      object-fit: cover;
+      display: block;
+    }
+
+    .card-content {
+      padding: 20px;
+      text-align: center;
+    }
+
+    .card-content h2 {
+      margin: 0 0 8px;
+      font-size: 22px;
+    }
+
+    .card-content p {
+      color: #666;
+      font-size: 15px;
+    }
+
+    footer {
+      text-align: center;
+      padding: 30px;
+      color: #777;
+    }
   </style>
 </head>
+
 <body>
 
-  <h1>My Paintings 🎨</h1>
+  <header>
+    <h1>Santosh Menon's Paintings</h1>
+    <p>A personal gallery of Indian-inspired artwork</p>
+  </header>
 
-  <img src="20260404_065908.jpg">
-  <img src="Krishna.jpg">
-  <img src="kalki.jpg">
+  <section class="gallery">
+    <div class="card">
+      <img src="20260404_065908.jpg" alt="Painting by Santosh Menon">
+      <div class="card-content">
+        <h2>Artwork 1</h2>
+        <p>Original painting from my collection.</p>
+      </div>
+    </div>
+
+    <div class="card">
+      <img src="Krishna.jpg" alt="Krishna painting">
+      <div class="card-content">
+        <h2>Krishna</h2>
+        <p>Inspired by Indian mythology and devotion.</p>
+      </div>
+    </div>
+
+    <div class="card">
+      <img src="kalki.jpg" alt="Kalki painting">
+      <div class="card-content">
+        <h2>Kalki</h2>
+        <p>A mythological artwork inspired by Kalki.</p>
+      </div>
+    </div>
+  </section>
+
+  <footer>
+    <p>© 2026 Santosh Menon</p>
+  </footer>
 
 </body>
 </html>
