@@ -10,21 +10,48 @@
       color: #222;
     }
 
+    /* HEADER */
     header {
+      background: #111;
+      color: white;
+      padding: 20px 40px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    header h1 {
+      margin: 0;
+      font-size: 22px;
+    }
+
+    nav a {
+      color: white;
+      text-decoration: none;
+      margin-left: 20px;
+      font-size: 14px;
+    }
+
+    nav a:hover {
+      text-decoration: underline;
+    }
+
+    /* HERO SECTION */
+    .hero {
       text-align: center;
       padding: 60px 20px 30px;
     }
 
-    header h1 {
-      font-size: 42px;
+    .hero h2 {
+      font-size: 36px;
       margin-bottom: 10px;
     }
 
-    header p {
-      font-size: 18px;
+    .hero p {
       color: #666;
     }
 
+    /* GALLERY */
     .gallery {
       display: grid;
       grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
@@ -50,7 +77,6 @@
       width: 100%;
       height: 320px;
       object-fit: cover;
-      display: block;
     }
 
     .card-content {
@@ -58,59 +84,68 @@
       text-align: center;
     }
 
-    .card-content h2 {
-      margin: 0 0 8px;
-      font-size: 22px;
-    }
-
-    .card-content p {
-      color: #666;
-      font-size: 15px;
-    }
-
+    /* FOOTER */
     footer {
+      background: #111;
+      color: white;
       text-align: center;
-      padding: 30px;
-      color: #777;
+      padding: 30px 20px;
+      margin-top: 40px;
+    }
+
+    footer p {
+      margin: 5px 0;
+      font-size: 14px;
     }
   </style>
 </head>
 
 <body>
 
+  <!-- HEADER -->
   <header>
-    <h1>Santosh Menon's Paintings</h1>
-    <p>A personal gallery of Indian-inspired artwork</p>
+    <h1>Santosh Menon</h1>
+    <nav>
+      <a href="#">Home</a>
+      <a href="#">Gallery</a>
+      <a href="#">About</a>
+    </nav>
   </header>
 
+  <!-- HERO -->
+  <div class="hero">
+    <h2>My Paintings 🎨</h2>
+    <p>Indian-inspired watercolor artwork</p>
+  </div>
+
+  <!-- GALLERY -->
   <section class="gallery">
     <div class="card">
-      <img src="20260404_065908.jpg" alt="Painting by Santosh Menon">
+      <img src="20260404_065908.jpg">
       <div class="card-content">
-        <h2>Artwork 1</h2>
-        <p>Original painting from my collection.</p>
+        <h3>Artwork 1</h3>
       </div>
     </div>
 
     <div class="card">
-      <img src="Krishna.jpg" alt="Krishna painting">
+      <img src="Krishna.jpg">
       <div class="card-content">
-        <h2>Krishna</h2>
-        <p>Inspired by Indian mythology and devotion.</p>
+        <h3>Krishna</h3>
       </div>
     </div>
 
     <div class="card">
-      <img src="kalki.jpg" alt="Kalki painting">
+      <img src="kalki.jpg">
       <div class="card-content">
-        <h2>Kalki</h2>
-        <p>A mythological artwork inspired by Kalki.</p>
+        <h3>Kalki</h3>
       </div>
     </div>
   </section>
 
+  <!-- FOOTER -->
   <footer>
     <p>© 2026 Santosh Menon</p>
+    <p>Made with ❤️ and watercolor</p>
   </footer>
 
 </body>
