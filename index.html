@@ -1,109 +1,207 @@
-<style>
-  body {
-    margin: 0;
-    font-family: 'Segoe UI', sans-serif;
-    background: #0f0f0f;
-    color: #f5f5f5;
-  }
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Santosh Menon | Paintings</title>
 
-  /* HEADER */
-  header {
-    position: sticky;
-    top: 0;
-    background: #000;
-    color: white;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 15px 40px;
-  }
+  <style>
+    body {
+      margin: 0;
+      font-family: 'Segoe UI', sans-serif;
+      background: #0f0f0f;
+      color: #f5f5f5;
+    }
 
-  nav a {
-    color: #ddd;
-    text-decoration: none;
-    margin-left: 20px;
-  }
+    /* HEADER */
+    header {
+      position: sticky;
+      top: 0;
+      background: #000;
+      color: white;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 15px 40px;
+      z-index: 1000;
+    }
 
-  nav a:hover {
-    color: white;
-  }
+    header h3 {
+      margin: 0;
+    }
 
-  /* HERO */
-  .hero {
-    text-align: center;
-    padding: 80px 20px 40px;
-  }
+    nav a {
+      color: #ddd;
+      text-decoration: none;
+      margin-left: 20px;
+      font-size: 14px;
+    }
 
-  .hero p {
-    color: #aaa;
-  }
+    nav a:hover {
+      color: white;
+    }
 
-  /* GALLERY */
-  .gallery {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-    gap: 30px;
-    padding: 40px;
-    max-width: 1200px;
-    margin: auto;
-  }
+    /* HERO */
+    .hero {
+      text-align: center;
+      padding: 80px 20px 40px;
+    }
 
-  .card {
-    background: #1a1a1a;
-    border-radius: 16px;
-    overflow: hidden;
-    box-shadow: 0 8px 25px rgba(0,0,0,0.6);
-    transition: 0.3s;
-  }
+    .hero h1 {
+      font-size: 42px;
+      margin-bottom: 10px;
+    }
 
-  .card:hover {
-    transform: scale(1.03);
-  }
+    .hero p {
+      color: #aaa;
+      font-size: 18px;
+    }
 
-  .card img {
-    width: 100%;
-    height: 320px;
-    object-fit: cover;
-  }
+    /* GALLERY */
+    .gallery {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 30px;
+      padding: 40px;
+      max-width: 1200px;
+      margin: auto;
+    }
 
-  .card-content {
-    padding: 15px;
-  }
+    .card {
+      background: #1a1a1a;
+      border-radius: 16px;
+      overflow: hidden;
+      box-shadow: 0 8px 25px rgba(0,0,0,0.6);
+      transition: 0.3s;
+      cursor: pointer;
+    }
 
-  /* ABOUT */
-  .about {
-    text-align: center;
-    padding: 60px 20px;
-    background: #141414;
-  }
+    .card:hover {
+      transform: scale(1.03);
+    }
 
-  .about p {
-    color: #bbb;
-    max-width: 700px;
-    margin: auto;
-  }
+    .card img {
+      width: 100%;
+      height: 320px;
+      object-fit: cover;
+      transition: 0.3s;
+    }
 
-  /* CONTACT */
-  .contact {
-    text-align: center;
-    padding: 50px 20px;
-  }
+    .card:hover img {
+      transform: scale(1.05);
+    }
 
-  .contact a {
-    display: inline-block;
-    margin: 10px;
-    padding: 10px 20px;
-    background: white;
-    color: black;
-    text-decoration: none;
-    border-radius: 8px;
-  }
+    .card-content {
+      padding: 15px;
+      text-align: center;
+    }
 
-  /* FOOTER */
-  footer {
-    background: #000;
-    color: #aaa;
-    text-align: center;
-    padding: 25px;
-  }
-</style>
+    /* ABOUT */
+    .about {
+      text-align: center;
+      padding: 60px 20px;
+      background: #141414;
+    }
+
+    .about p {
+      color: #bbb;
+      max-width: 700px;
+      margin: auto;
+      line-height: 1.6;
+    }
+
+    /* CONTACT */
+    .contact {
+      text-align: center;
+      padding: 50px 20px;
+    }
+
+    .contact a {
+      display: inline-block;
+      margin: 10px;
+      padding: 10px 20px;
+      background: white;
+      color: black;
+      text-decoration: none;
+      border-radius: 8px;
+      font-weight: bold;
+    }
+
+    /* FOOTER */
+    footer {
+      background: #000;
+      color: #aaa;
+      text-align: center;
+      padding: 25px;
+      margin-top: 30px;
+    }
+  </style>
+</head>
+
+<body>
+
+  <!-- HEADER -->
+  <header>
+    <h3>Santosh Menon</h3>
+    <nav>
+      <a href="#">Home</a>
+      <a href="#gallery">Gallery</a>
+      <a href="#about">About</a>
+      <a href="#contact">Contact</a>
+    </nav>
+  </header>
+
+  <!-- HERO -->
+  <section class="hero">
+    <h1>My Paintings 🎨</h1>
+    <p>Indian-inspired watercolor artwork</p>
+  </section>
+
+  <!-- GALLERY -->
+  <section id="gallery" class="gallery">
+
+    <div class="card">
+      <img src="20260404_065908.jpg">
+      <div class="card-content">
+        <h3>Artwork 1</h3>
+      </div>
+    </div>
+
+    <div class="card">
+      <img src="Krishna.jpg">
+      <div class="card-content">
+        <h3>Krishna</h3>
+      </div>
+    </div>
+
+    <div class="card">
+      <img src="kalki.jpg">
+      <div class="card-content">
+        <h3>Kalki</h3>
+      </div>
+    </div>
+
+  </section>
+
+  <!-- ABOUT -->
+  <section id="about" class="about">
+    <h2>About Me</h2>
+    <p>
+      I am a passionate hobby artist exploring Indian mythology and cultural themes through watercolor.
+      Each painting reflects my personal journey and creative expression.
+    </p>
+  </section>
+
+  <!-- CONTACT -->
+  <section id="contact" class="contact">
+    <h2>Contact</h2>
+    <p>Want to collaborate or buy a painting?</p>
+    <a href="#">Email Me</a>
+  </section>
+
+  <!-- FOOTER -->
+  <footer>
+    <p>© 2026 Santosh Menon</p>
+    <p>Made with ❤️ and watercolor</p>
+  </footer>
+
+</body>
+</html>
