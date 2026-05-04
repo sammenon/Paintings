@@ -4,23 +4,9 @@
   <title>Santosh Menon | Paintings</title>
 
   <style>
-    body {
-      margin: 0;
-      font-family: 'Segoe UI', sans-serif;
-      background: #0f0f0f;
-      color: #f5f5f5;
-    }
-
-    header, footer {
-      background: #000;
-      text-align: center;
-      padding: 20px;
-    }
-
-    .hero {
-      text-align: center;
-      padding: 40px 20px;
-    }
+    body { margin: 0; font-family: 'Segoe UI', sans-serif; background: #0f0f0f; color: #f5f5f5; }
+    header, footer { background: #000; text-align: center; padding: 20px; }
+    .hero { text-align: center; padding: 40px 20px; }
 
     .gallery {
       display: grid;
@@ -38,9 +24,6 @@
       padding: 12px;
       text-decoration: none;
       color: white;
-      display: flex;
-      flex-direction: column;
-      justify-content: space-between;
     }
 
     .card img {
@@ -49,29 +32,13 @@
       object-fit: contain;
       background: #000;
       border-radius: 8px;
-      transition: transform 0.3s ease;
       display: block;
+      transition: transform 0.3s ease;
     }
 
-    .card:hover img {
-      transform: scale(1.03);
-    }
+    .card:hover img { transform: scale(1.03); }
 
-    .card h3 {
-      text-align: center;
-      padding: 12px 0 4px;
-      margin: 0;
-    }
-
-    .placeholder {
-      min-height: 260px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      background: #2a2a2a;
-      color: #aaa;
-      border-radius: 8px;
-    }
+    .card h3 { text-align: center; margin: 12px 0 4px; }
 
     .lightbox {
       display: none;
@@ -88,9 +55,7 @@
       box-sizing: border-box;
     }
 
-    .lightbox:target {
-      display: block;
-    }
+    .lightbox:target { display: block; }
 
     .lightbox img {
       max-width: 95%;
@@ -110,10 +75,7 @@
     }
 
     @media (max-width: 800px) {
-      .gallery {
-        grid-template-columns: 1fr;
-        padding: 20px;
-      }
+      .gallery { grid-template-columns: 1fr; padding: 20px; }
     }
   </style>
 </head>
@@ -126,76 +88,30 @@
 
   <section class="hero">
     <h2>My Art Gallery</h2>
-    <p>Click any painting to view fullscreen. Scroll if the image is large.</p>
+    <p>Click any painting to view fullscreen.</p>
   </section>
 
   <section class="gallery">
-
-    <a href="#img1" class="card">
-      <img src="20260404_065908.jpg" alt="Artwork 1">
-      <h3>Artwork 1</h3>
-    </a>
-
-    <a href="#img2" class="card">
-      <img src="Krishna.jpg" alt="Krishna Painting">
-      <h3>Krishna</h3>
-    </a>
-
-    <a href="#img3" class="card">
-      <img src="kalki.jpg" alt="Kalki Painting">
-      <h3>Kalki</h3>
-    </a>
-
-    <div class="card">
-      <div class="placeholder">Upload Painting 4</div>
-      <h3>Painting 4</h3>
-    </div>
-
-    <div class="card">
-      <div class="placeholder">Upload Painting 5</div>
-      <h3>Painting 5</h3>
-    </div>
-
-    <div class="card">
-      <div class="placeholder">Upload Painting 6</div>
-      <h3>Painting 6</h3>
-    </div>
-
-    <div class="card">
-      <div class="placeholder">Upload Painting 7</div>
-      <h3>Painting 7</h3>
-    </div>
-
-    <div class="card">
-      <div class="placeholder">Upload Painting 8</div>
-      <h3>Painting 8</h3>
-    </div>
-
-    <div class="card">
-      <div class="placeholder">Upload Painting 9</div>
-      <h3>Painting 9</h3>
-    </div>
-
+    <a href="#img1" class="card"><img src="20260404_065908.jpg"><h3>Artwork 1</h3></a>
+    <a href="#img2" class="card"><img src="Ganga.jpeg"><h3>Ganga</h3></a>
+    <a href="#img3" class="card"><img src="Krishna.jpg"><h3>Krishna</h3></a>
+    <a href="#img4" class="card"><img src="Matsyaavatar.jpeg"><h3>Matsya Avatar</h3></a>
+    <a href="#img5" class="card"><img src="Narasimhamurthy.jpeg"><h3>Narasimha Murthy</h3></a>
+    <a href="#img6" class="card"><img src="Shri Ram Hanuman.jpeg"><h3>Shri Ram Hanuman</h3></a>
+    <a href="#img7" class="card"><img src="Vanamali Krishna.jpeg"><h3>Vanamali Krishna</h3></a>
+    <a href="#img8" class="card"><img src="Varahamurthy.jpeg"><h3>Varaha Murthy</h3></a>
+    <a href="#img9" class="card"><img src="kalki.jpg"><h3>Kalki</h3></a>
   </section>
 
-  <div id="img1" class="lightbox">
-    <a href="#" class="close">×</a>
-    <img src="20260404_065908.jpg" alt="Artwork 1">
-  </div>
-
-  <div id="img2" class="lightbox">
-    <a href="#" class="close">×</a>
-    <img src="Krishna.jpg" alt="Krishna Painting">
-  </div>
-
-  <div id="img3" class="lightbox">
-    <a href="#" class="close">×</a>
-    <img src="kalki.jpg" alt="Kalki Painting">
-
-      <div id="img4" class="lightbox">
-    <a href="#" class="close">×</a>
-    <img src="kalki.jpg" alt="Ganga">
-  </div>
+  <div id="img1" class="lightbox"><a href="#" class="close">×</a><img src="20260404_065908.jpg"></div>
+  <div id="img2" class="lightbox"><a href="#" class="close">×</a><img src="Ganga.jpeg"></div>
+  <div id="img3" class="lightbox"><a href="#" class="close">×</a><img src="Krishna.jpg"></div>
+  <div id="img4" class="lightbox"><a href="#" class="close">×</a><img src="Matsyaavatar.jpeg"></div>
+  <div id="img5" class="lightbox"><a href="#" class="close">×</a><img src="Narasimhamurthy.jpeg"></div>
+  <div id="img6" class="lightbox"><a href="#" class="close">×</a><img src="Shri Ram Hanuman.jpeg"></div>
+  <div id="img7" class="lightbox"><a href="#" class="close">×</a><img src="Vanamali Krishna.jpeg"></div>
+  <div id="img8" class="lightbox"><a href="#" class="close">×</a><img src="Varahamurthy.jpeg"></div>
+  <div id="img9" class="lightbox"><a href="#" class="close">×</a><img src="kalki.jpg"></div>
 
   <footer>
     <p>© 2026 Santosh Menon</p>
