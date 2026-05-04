@@ -2,6 +2,7 @@
 <html>
 <head>
   <title>Santosh Menon | Paintings</title>
+
   <style>
     body {
       margin: 0;
@@ -12,20 +13,20 @@
 
     header, footer {
       background: #000;
-      color: white;
       text-align: center;
-      padding: 24px;
+      padding: 20px;
     }
 
     .hero {
       text-align: center;
-      padding: 50px 20px;
+      padding: 40px;
     }
 
+    /* GRID */
     .gallery {
       display: grid;
       grid-template-columns: repeat(3, 1fr);
-      gap: 24px;
+      gap: 20px;
       padding: 40px;
       max-width: 1100px;
       margin: auto;
@@ -33,32 +34,49 @@
 
     .card {
       background: #1a1a1a;
-      border-radius: 16px;
+      border-radius: 12px;
       overflow: hidden;
-      box-shadow: 0 8px 25px rgba(0,0,0,0.6);
-      text-align: center;
+      cursor: pointer;
     }
 
     .card img {
       width: 100%;
-      height: 280px;
+      height: 260px;
       object-fit: cover;
-      display: block;
+      transition: 0.3s;
+    }
+
+    .card img:hover {
+      transform: scale(1.05);
     }
 
     .card h3 {
-      padding: 15px;
-      margin: 0;
+      text-align: center;
+      padding: 10px;
     }
 
-    .placeholder {
-      height: 280px;
-      display: flex;
-      align-items: center;
+    /* LIGHTBOX */
+    .lightbox {
+      display: none;
+      position: fixed;
+      z-index: 999;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(0,0,0,0.9);
       justify-content: center;
-      background: #2a2a2a;
-      color: #aaa;
-      font-size: 18px;
+      align-items: center;
+    }
+
+    .lightbox img {
+      max-width: 90%;
+      max-height: 90%;
+      border-radius: 10px;
+    }
+
+    .lightbox:target {
+      display: flex;
     }
 
     @media (max-width: 800px) {
@@ -72,62 +90,45 @@
 <body>
 
   <header>
-    <h1>Santosh Menon's Paintings</h1>
+    <h1>Santosh Menon's Paintings 🎨</h1>
   </header>
 
-  <section class="hero">
-    <h2>My Art Gallery 🎨</h2>
-    <p>Indian-inspired watercolor artwork</p>
-  </section>
+  <div class="hero">
+    <p>Click any painting to view fullscreen</p>
+  </div>
 
-  <section class="gallery">
+  <!-- GALLERY -->
+  <div class="gallery">
 
-    <div class="card">
-      <img src="20260404_065908.jpg" alt="Artwork 1">
+    <a href="#img1" class="card">
+      <img src="20260404_065908.jpg">
       <h3>Artwork 1</h3>
-    </div>
+    </a>
 
-    <div class="card">
-      <img src="Krishna.jpg" alt="Krishna">
+    <a href="#img2" class="card">
+      <img src="Krishna.jpg">
       <h3>Krishna</h3>
-    </div>
+    </a>
 
-    <div class="card">
-      <img src="kalki.jpg" alt="Kalki">
+    <a href="#img3" class="card">
+      <img src="kalki.jpg">
       <h3>Kalki</h3>
-    </div>
+    </a>
 
-    <div class="card">
-      <div class="placeholder">Upload Painting 4</div>
-      <h3>Painting 4</h3>
-    </div>
+  </div>
 
-    <div class="card">
-      <div class="placeholder">Upload Painting 5</div>
-      <h3>Painting 5</h3>
-    </div>
+  <!-- LIGHTBOX POPUPS -->
+  <div id="img1" class="lightbox">
+    <a href="#"><img src="20260404_065908.jpg"></a>
+  </div>
 
-    <div class="card">
-      <div class="placeholder">Upload Painting 6</div>
-      <h3>Painting 6</h3>
-    </div>
+  <div id="img2" class="lightbox">
+    <a href="#"><img src="Krishna.jpg"></a>
+  </div>
 
-    <div class="card">
-      <div class="placeholder">Upload Painting 7</div>
-      <h3>Painting 7</h3>
-    </div>
-
-    <div class="card">
-      <div class="placeholder">Upload Painting 8</div>
-      <h3>Painting 8</h3>
-    </div>
-
-    <div class="card">
-      <div class="placeholder">Upload Painting 9</div>
-      <h3>Painting 9</h3>
-    </div>
-
-  </section>
+  <div id="img3" class="lightbox">
+    <a href="#"><img src="kalki.jpg"></a>
+  </div>
 
   <footer>
     <p>© 2026 Santosh Menon</p>
