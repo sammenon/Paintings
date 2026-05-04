@@ -17,11 +17,25 @@
     }
 
     .card {
+      position: relative;
       background: #1a1a1a;
       border-radius: 12px;
       padding: 12px;
       color: white;
       cursor: pointer;
+    }
+
+    .number-badge {
+      position: absolute;
+      top: 20px;
+      left: 20px;
+      background: rgba(0,0,0,0.75);
+      color: white;
+      padding: 6px 10px;
+      border-radius: 6px;
+      font-size: 13px;
+      font-weight: bold;
+      z-index: 2;
     }
 
     .card img {
@@ -99,7 +113,6 @@
       font-size: 38px;
       cursor: pointer;
       user-select: none;
-      text-decoration: none;
     }
 
     .close { top: 20px; right: 30px; }
@@ -108,7 +121,6 @@
 
     @media (max-width: 800px) {
       .gallery { grid-template-columns: 1fr; padding: 20px; }
-      .prev, .next { font-size: 30px; }
     }
   </style>
 </head>
@@ -173,8 +185,9 @@
       card.className = "card";
 
       card.innerHTML = `
+        <div class="number-badge">${index + 1}</div>
         <img src="${image.url}" alt="${formatTitle(image.name)}" onclick="openLightbox(${index})">
-        <h3>${formatTitle(image.name)}</h3>
+        <h3>${index + 1}. ${formatTitle(image.name)}</h3>
         <p class="details">8 x 10 canvas • GSM paper • Watercolor</p>
         <span class="tag">Available</span>
         <a class="buy" href="mailto:?subject=Painting Inquiry - ${formatTitle(image.name)}">Contact to Buy</a>
@@ -193,7 +206,8 @@
   function updateLightbox() {
     const image = images[currentIndex];
     document.getElementById("lightbox-img").src = image.url;
-    document.getElementById("lightbox-title").innerText = formatTitle(image.name);
+    document.getElementById("lightbox-title").innerText =
+      (currentIndex + 1) + ". " + formatTitle(image.name);
   }
 
   function closeLightbox() {
