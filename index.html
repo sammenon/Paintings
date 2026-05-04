@@ -5,7 +5,17 @@
   <style>
     body { margin: 0; font-family: 'Segoe UI', sans-serif; background: #0f0f0f; color: #f5f5f5; }
     header, footer { background: #000; text-align: center; padding: 20px; }
-    .hero { text-align: center; padding: 40px 20px; }
+    .hero, .about, .contact { text-align: center; padding: 40px 20px; }
+    .about, .contact { background: #141414; margin-top: 30px; }
+
+    .controls { text-align: center; padding: 20px; }
+    input, button {
+      padding: 10px 14px;
+      margin: 6px;
+      border-radius: 8px;
+      border: none;
+    }
+    button { cursor: pointer; font-weight: bold; }
 
     .gallery {
       display: grid;
@@ -30,12 +40,9 @@
       top: 20px;
       left: 20px;
       background: rgba(0,0,0,0.75);
-      color: white;
       padding: 6px 10px;
       border-radius: 6px;
-      font-size: 13px;
       font-weight: bold;
-      z-index: 2;
     }
 
     .card img {
@@ -44,75 +51,59 @@
       object-fit: contain;
       background: #000;
       border-radius: 8px;
-      display: block;
     }
 
     .card h3 { text-align: center; margin: 12px 0 4px; }
-
-    .details {
-      text-align: center;
-      color: #aaa;
-      font-size: 13px;
-      margin-bottom: 8px;
-    }
+    .details { text-align: center; color: #aaa; font-size: 13px; }
 
     .tag {
       display: block;
       width: fit-content;
-      margin: 0 auto 8px;
+      margin: 8px auto;
       padding: 5px 12px;
       border-radius: 999px;
       font-size: 12px;
       font-weight: bold;
-      background: #1f7a3f;
       color: white;
     }
 
+    .available { background: #1f7a3f; }
+    .sold { background: #7a1f1f; }
+
     .buy {
       display: block;
-      text-align: center;
       width: fit-content;
       margin: 8px auto 0;
       padding: 8px 14px;
-      border-radius: 8px;
       background: white;
       color: black;
       text-decoration: none;
-      font-size: 13px;
+      border-radius: 8px;
       font-weight: bold;
+      font-size: 13px;
     }
 
     .lightbox {
       display: none;
       position: fixed;
       z-index: 999;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
+      inset: 0;
       background: rgba(0,0,0,0.95);
       align-items: center;
       justify-content: center;
       flex-direction: column;
       overflow: auto;
       padding: 60px 20px;
-      box-sizing: border-box;
     }
 
     .lightbox.active { display: flex; }
-
-    .lightbox img {
-      max-width: 90%;
-      max-height: 80vh;
-      border-radius: 10px;
-    }
+    .lightbox img { max-width: 90%; max-height: 80vh; border-radius: 10px; }
 
     .close, .prev, .next {
       position: fixed;
       color: white;
       font-size: 38px;
       cursor: pointer;
-      user-select: none;
     }
 
     .close { top: 20px; right: 30px; }
@@ -133,7 +124,17 @@
 
 <section class="hero">
   <h2>My Art Gallery</h2>
-  <p>Paintings auto-loaded from GitHub. Click any painting to view fullscreen.</p>
+  <p>Indian-inspired watercolor artwork on 8 x 10 GSM paper.</p>
+</section>
+
+<section class="controls">
+  <input type="text" id="searchBox" placeholder="Search paintings..." onkeyup="renderGallery()">
+
+  <button onclick="setFilter('All')">All</button>
+  <button onclick="setFilter('Krishna')">Krishna</button>
+  <button onclick="setFilter('Avatar')">Avatar</button>
+  <button onclick="setFilter('Mythology')">Mythology</button>
+  <button onclick="setFilter('Nature')">Nature</button>
 </section>
 
 <section id="gallery" class="gallery"></section>
@@ -146,6 +147,20 @@
   <span class="next" onclick="showNext()">›</span>
 </div>
 
+<section class="about">
+  <h2>About the Artist</h2>
+  <p>
+    I am a hobby artist exploring Indian mythology, devotion, and cultural themes through watercolor.
+    Each artwork reflects my personal creative journey and interest in traditional Indian storytelling.
+  </p>
+</section>
+
+<section class="contact">
+  <h2>Contact</h2>
+  <p>Interested in a painting or collaboration?</p>
+  <p>Email: your-email@example.com</p>
+</section>
+
 <footer>
   <p>© 2026 Santosh Menon</p>
   <p>Artwork done on 8 x 10 canvas on GSM paper using Watercolor</p>
@@ -155,42 +170,75 @@
 <script>
   const repoApiUrl = "https://api.github.com/repos/sammenon/Paintings/contents/";
 
-  let images = [];
+  let paintings = [];
+  let filteredPaintings = [];
   let currentIndex = 0;
+  let currentFilter = "All";
+
+  const paintingInfo = {
+    "Krishna.jpg": { title: "Krishna", category: "Krishna", status: "Sold" },
+    "Vanamali Krishna.jpeg": { title: "Vanamali Krishna", category: "Krishna", status: "Available" },
+    "kalki.jpg": { title: "Kalki", category: "Avatar", status: "Available" },
+    "Matsyaavatar.jpeg": { title: "Matsya Avatar", category: "Avatar", status: "Available" },
+    "Varahamurthy.jpeg": { title: "Varaha Murthy", category: "Avatar", status: "Available" },
+    "Narasimhamurthy.jpeg": { title: "Narasimha Murthy", category: "Avatar", status: "Available" },
+    "Ganga.jpeg": { title: "Ganga", category: "Nature", status: "Available" },
+    "Shri Ram Hanuman.jpeg": { title: "Shri Ram Hanuman", category: "Mythology", status: "Available" }
+  };
 
   function formatTitle(filename) {
-    return filename
-      .replace(/\.[^/.]+$/, "")
-      .replace(/[-_]/g, " ");
+    return filename.replace(/\.[^/.]+$/, "").replace(/[-_]/g, " ");
   }
 
   fetch(repoApiUrl)
     .then(response => response.json())
     .then(files => {
-      images = files
+      paintings = files
         .filter(file => /\.(jpg|jpeg|png|gif|webp)$/i.test(file.name))
-        .map(file => ({
-          name: file.name,
-          url: file.download_url
-        }));
+        .map(file => {
+          const info = paintingInfo[file.name] || {};
+          return {
+            name: file.name,
+            url: file.download_url,
+            title: info.title || formatTitle(file.name),
+            category: info.category || "Mythology",
+            status: info.status || "Available"
+          };
+        });
 
-      buildGallery();
+      renderGallery();
     });
 
-  function buildGallery() {
-    const gallery = document.getElementById("gallery");
+  function setFilter(filter) {
+    currentFilter = filter;
+    renderGallery();
+  }
 
-    images.forEach((image, index) => {
+  function renderGallery() {
+    const gallery = document.getElementById("gallery");
+    const search = document.getElementById("searchBox").value.toLowerCase();
+
+    gallery.innerHTML = "";
+
+    filteredPaintings = paintings.filter(painting => {
+      const matchesSearch = painting.title.toLowerCase().includes(search);
+      const matchesFilter = currentFilter === "All" || painting.category === currentFilter;
+      return matchesSearch && matchesFilter;
+    });
+
+    filteredPaintings.forEach((painting, index) => {
       const card = document.createElement("div");
       card.className = "card";
 
+      const statusClass = painting.status === "Sold" ? "sold" : "available";
+
       card.innerHTML = `
         <div class="number-badge">${index + 1}</div>
-        <img src="${image.url}" alt="${formatTitle(image.name)}" onclick="openLightbox(${index})">
-        <h3>${index + 1}. ${formatTitle(image.name)}</h3>
+        <img src="${painting.url}" alt="${painting.title}" onclick="openLightbox(${index})">
+        <h3>${index + 1}. ${painting.title}</h3>
         <p class="details">8 x 10 canvas • GSM paper • Watercolor</p>
-        <span class="tag">Available</span>
-        <a class="buy" href="mailto:?subject=Painting Inquiry - ${formatTitle(image.name)}">Contact to Buy</a>
+        <span class="tag ${statusClass}">${painting.status}</span>
+        <a class="buy" href="mailto:your-email@example.com?subject=Painting Inquiry - ${painting.title}">Contact to Buy</a>
       `;
 
       gallery.appendChild(card);
@@ -204,10 +252,10 @@
   }
 
   function updateLightbox() {
-    const image = images[currentIndex];
-    document.getElementById("lightbox-img").src = image.url;
+    const painting = filteredPaintings[currentIndex];
+    document.getElementById("lightbox-img").src = painting.url;
     document.getElementById("lightbox-title").innerText =
-      (currentIndex + 1) + ". " + formatTitle(image.name);
+      (currentIndex + 1) + ". " + painting.title;
   }
 
   function closeLightbox() {
@@ -215,12 +263,12 @@
   }
 
   function showPrev() {
-    currentIndex = (currentIndex - 1 + images.length) % images.length;
+    currentIndex = (currentIndex - 1 + filteredPaintings.length) % filteredPaintings.length;
     updateLightbox();
   }
 
   function showNext() {
-    currentIndex = (currentIndex + 1) % images.length;
+    currentIndex = (currentIndex + 1) % filteredPaintings.length;
     updateLightbox();
   }
 </script>
