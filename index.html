@@ -19,7 +19,7 @@
 
     .hero {
       text-align: center;
-      padding: 40px 20px;
+      padding: 40px;
     }
 
     .gallery {
@@ -35,10 +35,7 @@
       background: #1a1a1a;
       border-radius: 12px;
       padding: 12px;
-      text-decoration: none;
-      color: white;
-      display: flex;
-      flex-direction: column;
+      cursor: pointer;
     }
 
     .card img {
@@ -47,81 +44,58 @@
       object-fit: contain;
       background: #000;
       border-radius: 8px;
-      transition: transform 0.3s ease;
-    }
-
-    .card:hover img {
-      transform: scale(1.03);
     }
 
     .card h3 {
       text-align: center;
-      margin: 12px 0 4px;
+      margin: 10px 0;
     }
 
     .details {
       text-align: center;
       color: #aaa;
       font-size: 13px;
-      margin-bottom: 8px;
     }
 
     .tag {
       display: block;
-      width: fit-content;
-      margin: 0 auto;
+      margin: 8px auto;
       padding: 5px 12px;
       border-radius: 999px;
+      width: fit-content;
       font-size: 12px;
-      font-weight: bold;
-    }
-
-    .available {
       background: #1f7a3f;
-    }
-
-    .sold {
-      background: #7a1f1f;
     }
 
     /* LIGHTBOX */
     .lightbox {
       display: none;
       position: fixed;
-      z-index: 999;
       top: 0;
       left: 0;
       width: 100%;
       height: 100%;
       background: rgba(0,0,0,0.95);
-      overflow: auto;
-      text-align: center;
-      padding: 60px 20px;
-    }
-
-    .lightbox:target {
-      display: block;
+      justify-content: center;
+      align-items: center;
     }
 
     .lightbox img {
-      max-width: 95%;
-      height: auto;
-      border-radius: 10px;
+      max-width: 90%;
+      max-height: 90%;
+    }
+
+    .lightbox.active {
+      display: flex;
     }
 
     .close {
-      color: white;
-      font-size: 34px;
       position: fixed;
       top: 20px;
       right: 30px;
-      text-decoration: none;
-    }
-
-    @media (max-width: 800px) {
-      .gallery {
-        grid-template-columns: 1fr;
-      }
+      color: white;
+      font-size: 30px;
+      cursor: pointer;
     }
   </style>
 </head>
@@ -134,93 +108,59 @@
 
 <section class="hero">
   <h2>My Art Gallery</h2>
-  <p>Click any painting to view fullscreen</p>
+  <p>All paintings auto-loaded from GitHub</p>
 </section>
 
-<section class="gallery">
+<section class="gallery" id="gallery"></section>
 
-  <a href="#img1" class="card">
-    <img src="20260404_065908.jpg">
-    <h3>Artwork 1</h3>
-    <p class="details">8 x 10 canvas • GSM paper • Watercolor</p>
-    <span class="tag available">Available</span>
-  </a>
-
-  <a href="#img2" class="card">
-    <img src="Ganga.jpeg">
-    <h3>Ganga</h3>
-    <p class="details">8 x 10 canvas • GSM paper • Watercolor</p>
-    <span class="tag available">Available</span>
-  </a>
-
-  <a href="#img3" class="card">
-    <img src="Krishna.jpg">
-    <h3>Krishna</h3>
-    <p class="details">8 x 10 canvas • GSM paper • Watercolor</p>
-    <span class="tag sold">Sold</span>
-  </a>
-
-  <a href="#img4" class="card">
-    <img src="Matsyaavatar.jpeg">
-    <h3>Matsya Avatar</h3>
-    <p class="details">8 x 10 canvas • GSM paper • Watercolor</p>
-    <span class="tag available">Available</span>
-  </a>
-
-  <a href="#img5" class="card">
-    <img src="Narasimhamurthy.jpeg">
-    <h3>Narasimha Murthy</h3>
-    <p class="details">8 x 10 canvas • GSM paper • Watercolor</p>
-    <span class="tag available">Available</span>
-  </a>
-
-  <a href="#img6" class="card">
-    <img src="Shri Ram Hanuman.jpeg">
-    <h3>Shri Ram Hanuman</h3>
-    <p class="details">8 x 10 canvas • GSM paper • Watercolor</p>
-    <span class="tag available">Available</span>
-  </a>
-
-  <a href="#img7" class="card">
-    <img src="Vanamali Krishna.jpeg">
-    <h3>Vanamali Krishna</h3>
-    <p class="details">8 x 10 canvas • GSM paper • Watercolor</p>
-    <span class="tag available">Available</span>
-  </a>
-
-  <a href="#img8" class="card">
-    <img src="Varahamurthy.jpeg">
-    <h3>Varaha Murthy</h3>
-    <p class="details">8 x 10 canvas • GSM paper • Watercolor</p>
-    <span class="tag available">Available</span>
-  </a>
-
-  <a href="#img9" class="card">
-    <img src="kalki.jpg">
-    <h3>Kalki</h3>
-    <p class="details">8 x 10 canvas • GSM paper • Watercolor</p>
-    <span class="tag available">Available</span>
-  </a>
-
-</section>
-
-<!-- LIGHTBOX -->
-
-<div id="img1" class="lightbox"><a href="#" class="close">×</a><img src="20260404_065908.jpg"></div>
-<div id="img2" class="lightbox"><a href="#" class="close">×</a><img src="Ganga.jpeg"></div>
-<div id="img3" class="lightbox"><a href="#" class="close">×</a><img src="Krishna.jpg"></div>
-<div id="img4" class="lightbox"><a href="#" class="close">×</a><img src="Matsyaavatar.jpeg"></div>
-<div id="img5" class="lightbox"><a href="#" class="close">×</a><img src="Narasimhamurthy.jpeg"></div>
-<div id="img6" class="lightbox"><a href="#" class="close">×</a><img src="Shri Ram Hanuman.jpeg"></div>
-<div id="img7" class="lightbox"><a href="#" class="close">×</a><img src="Vanamali Krishna.jpeg"></div>
-<div id="img8" class="lightbox"><a href="#" class="close">×</a><img src="Varahamurthy.jpeg"></div>
-<div id="img9" class="lightbox"><a href="#" class="close">×</a><img src="kalki.jpg"></div>
+<div id="lightbox" class="lightbox">
+  <span class="close" onclick="closeLightbox()">×</span>
+  <img id="lightbox-img">
+</div>
 
 <footer>
   <p>© 2026 Santosh Menon</p>
   <p>Artwork done on 8 x 10 canvas on GSM paper using Watercolor</p>
-  <p>Made with ❤️ and watercolor</p>
 </footer>
+
+<script>
+  const images = [
+    "20260404_065908.jpg",
+    "Ganga.jpeg",
+    "Krishna.jpg",
+    "Matsyaavatar.jpeg",
+    "Narasimhamurthy.jpeg",
+    "Shri Ram Hanuman.jpeg",
+    "Vanamali Krishna.jpeg",
+    "Varahamurthy.jpeg",
+    "kalki.jpg"
+  ];
+
+  const gallery = document.getElementById("gallery");
+
+  images.forEach((img, index) => {
+    const card = document.createElement("div");
+    card.className = "card";
+
+    card.innerHTML = `
+      <img src="${img}" onclick="openLightbox('${img}')">
+      <h3>${img.replace(/\.[^/.]+$/, "")}</h3>
+      <p class="details">8 x 10 canvas • GSM paper • Watercolor</p>
+      <span class="tag">Available</span>
+    `;
+
+    gallery.appendChild(card);
+  });
+
+  function openLightbox(src) {
+    document.getElementById("lightbox").classList.add("active");
+    document.getElementById("lightbox-img").src = src;
+  }
+
+  function closeLightbox() {
+    document.getElementById("lightbox").classList.remove("active");
+  }
+</script>
 
 </body>
 </html>
