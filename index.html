@@ -4,9 +4,23 @@
   <title>Santosh Menon | Paintings</title>
 
   <style>
-    body { margin: 0; font-family: 'Segoe UI', sans-serif; background: #0f0f0f; color: #f5f5f5; }
-    header, footer { background: #000; text-align: center; padding: 20px; }
-    .hero { text-align: center; padding: 40px 20px; }
+    body {
+      margin: 0;
+      font-family: 'Segoe UI', sans-serif;
+      background: #0f0f0f;
+      color: #f5f5f5;
+    }
+
+    header, footer {
+      background: #000;
+      text-align: center;
+      padding: 20px;
+    }
+
+    .hero {
+      text-align: center;
+      padding: 40px 20px;
+    }
 
     .gallery {
       display: grid;
@@ -20,10 +34,11 @@
     .card {
       background: #1a1a1a;
       border-radius: 12px;
-      overflow: hidden;
       padding: 12px;
       text-decoration: none;
       color: white;
+      display: flex;
+      flex-direction: column;
     }
 
     .card img {
@@ -32,14 +47,44 @@
       object-fit: contain;
       background: #000;
       border-radius: 8px;
-      display: block;
       transition: transform 0.3s ease;
     }
 
-    .card:hover img { transform: scale(1.03); }
+    .card:hover img {
+      transform: scale(1.03);
+    }
 
-    .card h3 { text-align: center; margin: 12px 0 4px; }
+    .card h3 {
+      text-align: center;
+      margin: 12px 0 4px;
+    }
 
+    .details {
+      text-align: center;
+      color: #aaa;
+      font-size: 13px;
+      margin-bottom: 8px;
+    }
+
+    .tag {
+      display: block;
+      width: fit-content;
+      margin: 0 auto;
+      padding: 5px 12px;
+      border-radius: 999px;
+      font-size: 12px;
+      font-weight: bold;
+    }
+
+    .available {
+      background: #1f7a3f;
+    }
+
+    .sold {
+      background: #7a1f1f;
+    }
+
+    /* LIGHTBOX */
     .lightbox {
       display: none;
       position: fixed;
@@ -52,16 +97,16 @@
       overflow: auto;
       text-align: center;
       padding: 60px 20px;
-      box-sizing: border-box;
     }
 
-    .lightbox:target { display: block; }
+    .lightbox:target {
+      display: block;
+    }
 
     .lightbox img {
       max-width: 95%;
       height: auto;
       border-radius: 10px;
-      margin-top: 20px;
     }
 
     .close {
@@ -71,92 +116,111 @@
       top: 20px;
       right: 30px;
       text-decoration: none;
-      font-weight: bold;
     }
 
     @media (max-width: 800px) {
-      .gallery { grid-template-columns: 1fr; padding: 20px; }
+      .gallery {
+        grid-template-columns: 1fr;
+      }
     }
   </style>
 </head>
 
 <body>
 
-  <header>
-    <h1>Santosh Menon's Paintings 🎨</h1>
-  </header>
+<header>
+  <h1>Santosh Menon's Paintings 🎨</h1>
+</header>
 
-  <section class="hero">
-    <h2>My Art Gallery</h2>
-    <p>Click any painting to view fullscreen.</p>
-  </section>
+<section class="hero">
+  <h2>My Art Gallery</h2>
+  <p>Click any painting to view fullscreen</p>
+</section>
 
-  <section class="gallery">
+<section class="gallery">
 
-    <a href="#img1" class="card">
-      <img src="20260404_065908.jpg">
-      <h3>Artwork 1</h3>
-    </a>
+  <a href="#img1" class="card">
+    <img src="20260404_065908.jpg">
+    <h3>Artwork 1</h3>
+    <p class="details">8 x 10 canvas • GSM paper • Watercolor</p>
+    <span class="tag available">Available</span>
+  </a>
 
-    <a href="#img2" class="card">
-      <img src="Ganga.jpeg">
-      <h3>Ganga</h3>
-    </a>
+  <a href="#img2" class="card">
+    <img src="Ganga.jpeg">
+    <h3>Ganga</h3>
+    <p class="details">8 x 10 canvas • GSM paper • Watercolor</p>
+    <span class="tag available">Available</span>
+  </a>
 
-    <a href="#img3" class="card">
-      <img src="Krishna.jpg">
-      <h3>Krishna</h3>
-    </a>
+  <a href="#img3" class="card">
+    <img src="Krishna.jpg">
+    <h3>Krishna</h3>
+    <p class="details">8 x 10 canvas • GSM paper • Watercolor</p>
+    <span class="tag sold">Sold</span>
+  </a>
 
-    <a href="#img4" class="card">
-      <img src="Matsyaavatar.jpeg">
-      <h3>Matsya Avatar</h3>
-    </a>
+  <a href="#img4" class="card">
+    <img src="Matsyaavatar.jpeg">
+    <h3>Matsya Avatar</h3>
+    <p class="details">8 x 10 canvas • GSM paper • Watercolor</p>
+    <span class="tag available">Available</span>
+  </a>
 
-    <a href="#img5" class="card">
-      <img src="Narasimhamurthy.jpeg">
-      <h3>Narasimha Murthy</h3>
-    </a>
+  <a href="#img5" class="card">
+    <img src="Narasimhamurthy.jpeg">
+    <h3>Narasimha Murthy</h3>
+    <p class="details">8 x 10 canvas • GSM paper • Watercolor</p>
+    <span class="tag available">Available</span>
+  </a>
 
-    <a href="#img6" class="card">
-      <img src="Shri Ram Hanuman.jpeg">
-      <h3>Shri Ram Hanuman</h3>
-    </a>
+  <a href="#img6" class="card">
+    <img src="Shri Ram Hanuman.jpeg">
+    <h3>Shri Ram Hanuman</h3>
+    <p class="details">8 x 10 canvas • GSM paper • Watercolor</p>
+    <span class="tag available">Available</span>
+  </a>
 
-    <a href="#img7" class="card">
-      <img src="Vanamali Krishna.jpeg">
-      <h3>Vanamali Krishna</h3>
-    </a>
+  <a href="#img7" class="card">
+    <img src="Vanamali Krishna.jpeg">
+    <h3>Vanamali Krishna</h3>
+    <p class="details">8 x 10 canvas • GSM paper • Watercolor</p>
+    <span class="tag available">Available</span>
+  </a>
 
-    <a href="#img8" class="card">
-      <img src="Varahamurthy.jpeg">
-      <h3>Varaha Murthy</h3>
-    </a>
+  <a href="#img8" class="card">
+    <img src="Varahamurthy.jpeg">
+    <h3>Varaha Murthy</h3>
+    <p class="details">8 x 10 canvas • GSM paper • Watercolor</p>
+    <span class="tag available">Available</span>
+  </a>
 
-    <a href="#img9" class="card">
-      <img src="kalki.jpg">
-      <h3>Kalki</h3>
-    </a>
+  <a href="#img9" class="card">
+    <img src="kalki.jpg">
+    <h3>Kalki</h3>
+    <p class="details">8 x 10 canvas • GSM paper • Watercolor</p>
+    <span class="tag available">Available</span>
+  </a>
 
-  </section>
+</section>
 
-  <!-- LIGHTBOX -->
+<!-- LIGHTBOX -->
 
-  <div id="img1" class="lightbox"><a href="#" class="close">×</a><img src="20260404_065908.jpg"></div>
-  <div id="img2" class="lightbox"><a href="#" class="close">×</a><img src="Ganga.jpeg"></div>
-  <div id="img3" class="lightbox"><a href="#" class="close">×</a><img src="Krishna.jpg"></div>
-  <div id="img4" class="lightbox"><a href="#" class="close">×</a><img src="Matsyaavatar.jpeg"></div>
-  <div id="img5" class="lightbox"><a href="#" class="close">×</a><img src="Narasimhamurthy.jpeg"></div>
-  <div id="img6" class="lightbox"><a href="#" class="close">×</a><img src="Shri Ram Hanuman.jpeg"></div>
-  <div id="img7" class="lightbox"><a href="#" class="close">×</a><img src="Vanamali Krishna.jpeg"></div>
-  <div id="img8" class="lightbox"><a href="#" class="close">×</a><img src="Varahamurthy.jpeg"></div>
-  <div id="img9" class="lightbox"><a href="#" class="close">×</a><img src="kalki.jpg"></div>
+<div id="img1" class="lightbox"><a href="#" class="close">×</a><img src="20260404_065908.jpg"></div>
+<div id="img2" class="lightbox"><a href="#" class="close">×</a><img src="Ganga.jpeg"></div>
+<div id="img3" class="lightbox"><a href="#" class="close">×</a><img src="Krishna.jpg"></div>
+<div id="img4" class="lightbox"><a href="#" class="close">×</a><img src="Matsyaavatar.jpeg"></div>
+<div id="img5" class="lightbox"><a href="#" class="close">×</a><img src="Narasimhamurthy.jpeg"></div>
+<div id="img6" class="lightbox"><a href="#" class="close">×</a><img src="Shri Ram Hanuman.jpeg"></div>
+<div id="img7" class="lightbox"><a href="#" class="close">×</a><img src="Vanamali Krishna.jpeg"></div>
+<div id="img8" class="lightbox"><a href="#" class="close">×</a><img src="Varahamurthy.jpeg"></div>
+<div id="img9" class="lightbox"><a href="#" class="close">×</a><img src="kalki.jpg"></div>
 
-  <footer>
-    <p>© 2026 Santosh Menon</p>
-    <p>Artwork done on 8 x 10 canvas on GSM paper using Watercolor</p>
-    <p>Made with ❤️ and watercolor</p>
-  </footer>
+<footer>
+  <p>© 2026 Santosh Menon</p>
+  <p>Artwork done on 8 x 10 canvas on GSM paper using Watercolor</p>
+  <p>Made with ❤️ and watercolor</p>
+</footer>
 
 </body>
 </html>
