@@ -2,25 +2,10 @@
 <html>
 <head>
   <title>Santosh Menon | Paintings</title>
-
   <style>
-    body {
-      margin: 0;
-      font-family: 'Segoe UI', sans-serif;
-      background: #0f0f0f;
-      color: #f5f5f5;
-    }
-
-    header, footer {
-      background: #000;
-      text-align: center;
-      padding: 20px;
-    }
-
-    .hero {
-      text-align: center;
-      padding: 40px;
-    }
+    body { margin: 0; font-family: 'Segoe UI', sans-serif; background: #0f0f0f; color: #f5f5f5; }
+    header, footer { background: #000; text-align: center; padding: 20px; }
+    .hero { text-align: center; padding: 40px 20px; }
 
     .gallery {
       display: grid;
@@ -35,6 +20,7 @@
       background: #1a1a1a;
       border-radius: 12px;
       padding: 12px;
+      color: white;
       cursor: pointer;
     }
 
@@ -44,58 +30,85 @@
       object-fit: contain;
       background: #000;
       border-radius: 8px;
+      display: block;
     }
 
-    .card h3 {
-      text-align: center;
-      margin: 10px 0;
-    }
+    .card h3 { text-align: center; margin: 12px 0 4px; }
 
     .details {
       text-align: center;
       color: #aaa;
       font-size: 13px;
+      margin-bottom: 8px;
     }
 
     .tag {
       display: block;
-      margin: 8px auto;
+      width: fit-content;
+      margin: 0 auto 8px;
       padding: 5px 12px;
       border-radius: 999px;
-      width: fit-content;
       font-size: 12px;
+      font-weight: bold;
       background: #1f7a3f;
+      color: white;
     }
 
-    /* LIGHTBOX */
+    .buy {
+      display: block;
+      text-align: center;
+      width: fit-content;
+      margin: 8px auto 0;
+      padding: 8px 14px;
+      border-radius: 8px;
+      background: white;
+      color: black;
+      text-decoration: none;
+      font-size: 13px;
+      font-weight: bold;
+    }
+
     .lightbox {
       display: none;
       position: fixed;
+      z-index: 999;
       top: 0;
       left: 0;
       width: 100%;
       height: 100%;
       background: rgba(0,0,0,0.95);
-      justify-content: center;
       align-items: center;
+      justify-content: center;
+      flex-direction: column;
+      overflow: auto;
+      padding: 60px 20px;
+      box-sizing: border-box;
     }
+
+    .lightbox.active { display: flex; }
 
     .lightbox img {
       max-width: 90%;
-      max-height: 90%;
+      max-height: 80vh;
+      border-radius: 10px;
     }
 
-    .lightbox.active {
-      display: flex;
-    }
-
-    .close {
+    .close, .prev, .next {
       position: fixed;
-      top: 20px;
-      right: 30px;
       color: white;
-      font-size: 30px;
+      font-size: 38px;
       cursor: pointer;
+      user-select: none;
+      text-decoration: none;
+    }
+
+    .close { top: 20px; right: 30px; }
+    .prev { left: 30px; top: 50%; }
+    .next { right: 30px; top: 50%; }
+
+    @media (max-width: 800px) {
+      .gallery { grid-template-columns: 1fr; padding: 20px; }
+      .prev, .next { font-size: 30px; }
     }
   </style>
 </head>
@@ -108,57 +121,93 @@
 
 <section class="hero">
   <h2>My Art Gallery</h2>
-  <p>All paintings auto-loaded from GitHub</p>
+  <p>Paintings auto-loaded from GitHub. Click any painting to view fullscreen.</p>
 </section>
 
-<section class="gallery" id="gallery"></section>
+<section id="gallery" class="gallery"></section>
 
 <div id="lightbox" class="lightbox">
   <span class="close" onclick="closeLightbox()">×</span>
+  <span class="prev" onclick="showPrev()">‹</span>
   <img id="lightbox-img">
+  <h3 id="lightbox-title"></h3>
+  <span class="next" onclick="showNext()">›</span>
 </div>
 
 <footer>
   <p>© 2026 Santosh Menon</p>
   <p>Artwork done on 8 x 10 canvas on GSM paper using Watercolor</p>
+  <p>Made with ❤️ and watercolor</p>
 </footer>
 
 <script>
-  const images = [
-    "20260404_065908.jpg",
-    "Ganga.jpeg",
-    "Krishna.jpg",
-    "Matsyaavatar.jpeg",
-    "Narasimhamurthy.jpeg",
-    "Shri Ram Hanuman.jpeg",
-    "Vanamali Krishna.jpeg",
-    "Varahamurthy.jpeg",
-    "kalki.jpg"
-  ];
+  const repoApiUrl = "https://api.github.com/repos/sammenon/Paintings/contents/";
 
-  const gallery = document.getElementById("gallery");
+  let images = [];
+  let currentIndex = 0;
 
-  images.forEach((img, index) => {
-    const card = document.createElement("div");
-    card.className = "card";
+  function formatTitle(filename) {
+    return filename
+      .replace(/\.[^/.]+$/, "")
+      .replace(/[-_]/g, " ");
+  }
 
-    card.innerHTML = `
-      <img src="${img}" onclick="openLightbox('${img}')">
-      <h3>${img.replace(/\.[^/.]+$/, "")}</h3>
-      <p class="details">8 x 10 canvas • GSM paper • Watercolor</p>
-      <span class="tag">Available</span>
-    `;
+  fetch(repoApiUrl)
+    .then(response => response.json())
+    .then(files => {
+      images = files
+        .filter(file => /\.(jpg|jpeg|png|gif|webp)$/i.test(file.name))
+        .map(file => ({
+          name: file.name,
+          url: file.download_url
+        }));
 
-    gallery.appendChild(card);
-  });
+      buildGallery();
+    });
 
-  function openLightbox(src) {
+  function buildGallery() {
+    const gallery = document.getElementById("gallery");
+
+    images.forEach((image, index) => {
+      const card = document.createElement("div");
+      card.className = "card";
+
+      card.innerHTML = `
+        <img src="${image.url}" alt="${formatTitle(image.name)}" onclick="openLightbox(${index})">
+        <h3>${formatTitle(image.name)}</h3>
+        <p class="details">8 x 10 canvas • GSM paper • Watercolor</p>
+        <span class="tag">Available</span>
+        <a class="buy" href="mailto:?subject=Painting Inquiry - ${formatTitle(image.name)}">Contact to Buy</a>
+      `;
+
+      gallery.appendChild(card);
+    });
+  }
+
+  function openLightbox(index) {
+    currentIndex = index;
+    updateLightbox();
     document.getElementById("lightbox").classList.add("active");
-    document.getElementById("lightbox-img").src = src;
+  }
+
+  function updateLightbox() {
+    const image = images[currentIndex];
+    document.getElementById("lightbox-img").src = image.url;
+    document.getElementById("lightbox-title").innerText = formatTitle(image.name);
   }
 
   function closeLightbox() {
     document.getElementById("lightbox").classList.remove("active");
+  }
+
+  function showPrev() {
+    currentIndex = (currentIndex - 1 + images.length) % images.length;
+    updateLightbox();
+  }
+
+  function showNext() {
+    currentIndex = (currentIndex + 1) % images.length;
+    updateLightbox();
   }
 </script>
 
