@@ -22,7 +22,7 @@
       padding: 40px;
     }
 
-    /* GRID */
+    /* 3x3 GRID */
     .gallery {
       display: grid;
       grid-template-columns: repeat(3, 1fr);
@@ -55,11 +55,19 @@
       padding: 10px;
     }
 
+    .placeholder {
+      height: 260px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: #2a2a2a;
+      color: #aaa;
+    }
+
     /* LIGHTBOX */
     .lightbox {
       display: none;
       position: fixed;
-      z-index: 999;
       top: 0;
       left: 0;
       width: 100%;
@@ -72,7 +80,6 @@
     .lightbox img {
       max-width: 90%;
       max-height: 90%;
-      border-radius: 10px;
     }
 
     .lightbox:target {
@@ -97,7 +104,7 @@
     <p>Click any painting to view fullscreen</p>
   </div>
 
-  <!-- GALLERY -->
+  <!-- 3x3 GALLERY -->
   <div class="gallery">
 
     <a href="#img1" class="card">
@@ -115,9 +122,16 @@
       <h3>Kalki</h3>
     </a>
 
+    <div class="card"><div class="placeholder">Upload 4</div></div>
+    <div class="card"><div class="placeholder">Upload 5</div></div>
+    <div class="card"><div class="placeholder">Upload 6</div></div>
+    <div class="card"><div class="placeholder">Upload 7</div></div>
+    <div class="card"><div class="placeholder">Upload 8</div></div>
+    <div class="card"><div class="placeholder">Upload 9</div></div>
+
   </div>
 
-  <!-- LIGHTBOX POPUPS -->
+  <!-- LIGHTBOX -->
   <div id="img1" class="lightbox">
     <a href="#"><img src="20260404_065908.jpg"></a>
   </div>
